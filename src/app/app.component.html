@@ -1,0 +1,34 @@
+<div class='app-top-header'>
+  <h1>
+    Welcome to {{ title }}
+  </h1>
+  <div class='audio-container' *ngIf="selectedTrackStreamUrl">
+    <figure>
+      <figcaption>You are listen to: [  {{selectedTrackTitle}}  ]</figcaption>
+      <audio controls [src]='selectedTrackStreamUrl' autoplay>
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
+    </figure>
+  </div>
+  <img *ngIf="!selectedTrackStreamUrl" width="300" alt="Angular Logo"
+       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<main>
+  <div class='search-container'>
+    <input type='text' id='trackInput' [(ngModel)]="searchValue">
+    <button class='submit-btn' type='submit' (click)='getTracks()'>Go</button>
+    <button class='next-btn' (click)='nextTracks()'>Next</button>
+  </div>
+  <h3>Search Results</h3>
+  <section class='grid'>
+    <article class='item-container' *ngFor="let track of scTracks">
+      <div class='btn' (click)='playStream($event, track)'>
+        <img class='article-img' src='{{track.artwork_url}}' alt=' '/>
+        <div class='article-title'>
+          {{track.title}}
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
